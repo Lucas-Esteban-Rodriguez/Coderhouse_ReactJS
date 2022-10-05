@@ -1,0 +1,12 @@
+.card-producto {
+    width: 250px;
+    height: auto;
+    border: solid 2px aqua;
+}
+img {
+    display: block;
+    width: 200px;
+    height: 200px;
+    aspect-ratio: auto 224 / 224;
+    object-fit: contain;
+}
