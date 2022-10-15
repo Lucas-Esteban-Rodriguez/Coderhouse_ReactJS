@@ -1,11 +1,12 @@
 import { useEffect , useState } from "react"
 import { getProduct } from "../AsyncMock/AsynkMock"
 import { useParams } from "react-router-dom"
+import ItemDetail from "../ItemDetail/ItemDetail"
 
 const ItemDetailContainer = () => {
     
     const {productId} = useParams()
-    const [ product , setProduct ] = useState([])
+    const [ product , setProduct ] = useState()
 
     useEffect( () => {
         getProduct(productId).then( res => {
@@ -15,9 +16,7 @@ const ItemDetailContainer = () => {
 
     return (
         <div>
-            <h1>Detalle del producto</h1>
-            <p>{product?.name}</p>
-            <p>{product?.desc}</p>
+            <ItemDetail {...product} />
         </div>
     )
 }
