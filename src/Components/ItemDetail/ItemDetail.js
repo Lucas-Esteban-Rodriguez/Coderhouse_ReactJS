@@ -1,22 +1,27 @@
 import { useContext, useState } from 'react'
-import { CartContext } from '../../context/CartContext'
+import { CartContext } from '../../context/cartContext'
 import ItemCount from '../ItemCount/ItemCount'
 import './ItemDetail.css'
 
-const ItemDetail = ({id,name,img,price,desc,category,stock}) => {
+const ItemDetail = ({ id, name, img, category, desc, price, stock }) => {
 
-    const { addItem } = useContext(CartContext)
+    const [quantityToAdd, setQuantityToAdd] = useState(0)
 
-    const [quantityToAdd , setQuantityToAdd] = useState(0)
+    const { addItem , getProductQuantity } = useContext(CartContext)
 
     const handleOnAdd = (quantity) => {
+        
         setQuantityToAdd(quantity)
-        const productToAdd = {id, name, price, img, quantity}
+
+        const productToAdd = {id, name, price, quantity, img}
+
         addItem(productToAdd)
     }
 
+    const productAddedQuantity = getProductQuantity(id)
+
     return(
-        <article className="card-producto card m-auto mt-5 d-flex flex-column align-items-center">
+        <article className="card-producto card m-auto mt-2 d-flex flex-column align-items-center">
             <header>
                 <h5>{name}</h5>
             </header>
@@ -29,7 +34,7 @@ const ItemDetail = ({id,name,img,price,desc,category,stock}) => {
                 <p>Precio: {price}</p>
             </section>
             <footer>
-                <ItemCount stock={stock} onAdd={handleOnAdd} />
+                <ItemCount stock={stock} onAdd={handleOnAdd} initial={productAddedQuantity} />
             </footer>
         </article>
     )

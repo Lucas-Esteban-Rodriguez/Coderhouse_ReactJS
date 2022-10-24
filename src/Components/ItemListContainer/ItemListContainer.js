@@ -1,8 +1,8 @@
 import './ItemListContainer.css'
 import ItemList from '../ItemList/ItemList';
 import { useEffect , useState } from 'react';
-import { getProducts, getProductsByCategory } from '../AsyncMock/AsynkMock';
 import { useParams } from 'react-router-dom';
+import { collection , getDocs, getFirestore , query , where} from 'firebase/firestore'
 
 
 const ItemListContainer = () => {
@@ -11,15 +11,12 @@ const ItemListContainer = () => {
     const [ products , setProducts ] = useState([])
 
     useEffect( () => {
-        if(!categoryId) {
-            getProducts().then( res => {
-                setProducts(res)
-            })
-        } else{
-            getProductsByCategory(categoryId).then(res => {
-                setProducts(res)
-            })
-        }
+
+        const db = getFirestore()
+        const itemsCollection = categoryId ? query(collection(db,'Items'), where('category', '==', categoryId )) : collection(db,'Items')
+        getDocs(itemsCollection).then((res) => {setProducts(res.docs.map((doc) => ({ id: doc.id , ...doc.data() }) ))} )
+
+
     },[categoryId])
     
     return (

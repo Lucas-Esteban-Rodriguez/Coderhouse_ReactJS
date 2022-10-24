@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
     return (
         <nav className='d-flex justify-content-around align-items-center'>
-        <Link to={'/'}>
-            <p>CoffeeStore</p>
+        <Link className='btn' to={'/'}>
+            CoffeeStore
         </Link>
         <div className='d-flex justify-content-between align-items-center'>
             <Link className='px-3 btn' to={'/'}>Inicio</Link>

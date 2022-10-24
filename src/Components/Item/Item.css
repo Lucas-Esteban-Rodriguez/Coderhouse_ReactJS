@@ -1,7 +1,7 @@
 .card-producto {
     width: 250px;
     height: auto;
-    border: solid 2px aqua;
+    border: solid 2px grey;
 }
 img {
     display: block;
