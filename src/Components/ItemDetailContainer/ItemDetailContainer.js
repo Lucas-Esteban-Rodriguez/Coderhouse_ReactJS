@@ -7,6 +7,7 @@ const ItemDetailContainer = () => {
     
     const {productId} = useParams()
     const [ product , setProduct ] = useState()
+    const [ data , setData ] = useState()
 
     useEffect( () => {
 
@@ -15,16 +16,16 @@ const ItemDetailContainer = () => {
         getDoc(docRef).then( doc => {
             
             const data = doc.data()
+            setData(data)
             const productAdapted = {id: doc.id, ...data}
             setProduct(productAdapted)
-
             }
         )
     },[productId])
 
     return (
         <div>
-            {product?<ItemDetail {...product} />:<h1>El producto no existe</h1>}
+            {data ? <ItemDetail {...product} />:<h1>El producto no existe</h1>}
         </div>
     )
 }
