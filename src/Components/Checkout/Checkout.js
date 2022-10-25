@@ -14,10 +14,6 @@ const Checkout = () => {
     const [ email , setEmail ] = useState()
     const [ confirmedEmail , setConfirmedEmail ] = useState()
 
-    const [ formComplete , setFormComplete ] = useState(false)
-
-
-
     const createOrder = async () => {
 
         try {
