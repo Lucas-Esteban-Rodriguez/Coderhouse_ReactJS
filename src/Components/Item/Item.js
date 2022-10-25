@@ -8,7 +8,7 @@ const Item = ({img,id,name,price}) => {
                 <h5>{name}</h5>
             </header>
             <picture>
-                <img src={img}></img>
+                <img alt="name" src={img}></img>
             </picture>
             <section>
             <p className="mt-2">Precio: {price}</p>

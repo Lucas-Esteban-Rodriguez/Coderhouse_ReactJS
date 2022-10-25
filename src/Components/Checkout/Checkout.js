@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import { CartContext } from "../../context/cartContext"
 import { getFirestore , collection , query , where , getDocs , documentId , writeBatch , addDoc } from 'firebase/firestore'
-import CartItem from "../CartItem/CartItem"
 
 const Checkout = () => {
 
@@ -24,11 +23,11 @@ const Checkout = () => {
         try {
             
             const order = {
-                buyer : {name: name + ' ' + surname, phone: phone, email: email},
+                buyer : {name: name && surname ? name + ' ' + surname : console.log('falta nombre'), phone: phone, email: email === confirmedEmail? email : console.log('falta email') },
                 items: cart,
                 total: totalPrice,
                 state: 'complete',
-                fecha: new Date
+                fecha: new Date()
             }
 
             const db = getFirestore()
@@ -69,12 +68,6 @@ const Checkout = () => {
 
     }
 
-    if (name, surname, phone, email && email === confirmedEmail) {
-        console.log('Listo para finalizar compra')
-    } else {
-        console.log('Faltan datos')
-    }
-
     return(
         <div className="d-flex flex-row">
             <div className="px-5 bg-light col-8">
@@ -104,7 +97,7 @@ const Checkout = () => {
                         </label>
                     </div>
                     </div>
-                    {formComplete ? <button type="button" className='btn btn-primary col-auto my-3' onClick={()=> createOrder()}>Enviar</button> : <p>Completá los datos para poder finalizar la compra</p>}
+                    <button type="button" className='btn btn-primary col-auto my-3' onClick={()=> createOrder()}>Enviar</button>
                 </form>
                 <p>{idOrder}</p>
             </div>

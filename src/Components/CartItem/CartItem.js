@@ -10,7 +10,7 @@ const CartItem = ({ id , name , img , quantity , price }) => {
 
     return(
         <div className="d-flex flex-row justify-content-around align-items-center w-100">
-            <img src={img}></img>
+            <img alt="name" src={img}></img>
             <p>{name}</p>
             <p>Cantidad: {quantity}</p>
             <p>Precio: {price}</p>
